@@ -119,6 +119,61 @@ nav a:hover {
 
         h1, h2 { color: white; font-weight: normal; }
         hr { border: 0; border-top: 1px solid #333; margin: 2rem 0; }
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        height: auto;
+        overflow-y: auto;
+    }
+
+    aside {
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        border-right: none;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background-color: var(--sidebar-bg);
+    }
+
+    .user-prefix {
+        margin-bottom: 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    /* Minimalist Top Nav */
+    nav {
+        display: flex;
+        overflow-x: auto; /* Allows swiping left/right if text is long */
+        white-space: nowrap;
+        gap: 1.5rem;
+        padding-bottom: 0.5rem;
+        -webkit-overflow-scrolling: touch; /* Smooth swiping on iOS */
+    }
+
+    /* Hide scrollbar but keep functionality */
+    nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    nav a {
+        background: none !important; /* Force remove backgrounds */
+        border: none !important;     /* Force remove borders */
+        padding: 0 !important;      /* Force remove padding */
+        font-size: 1rem;
+        flex: 0 0 auto;             /* Prevent links from shrinking */
+    }
+
+    main {
+        padding: 2rem 1.2rem;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+}
+
     </style>
 </head>
 <body>
