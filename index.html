@@ -3,71 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Documentation | IMGB</title>
+    <title>IMGB // Terminal</title>
     <style>
-        :root { --primary: #2d3436; --accent: #0984e3; --bg: #f5f6fa; --text: #2f3640; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); margin: 0; }
-        header { background: var(--primary); color: white; padding: 3rem 1rem; text-align: center; }
-        nav { background: white; padding: 1rem; position: sticky; top: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
-        nav a { margin: 0 15px; text-decoration: none; color: var(--primary); font-weight: bold; }
-        .container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        section { padding: 2rem 0; border-bottom: 1px solid #eee; }
-        h2 { color: var(--accent); border-left: 4px solid var(--accent); padding-left: 10px; }
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1rem 0; }
-        .gallery img { width: 100%; border-radius: 4px; border: 1px solid #ddd; }
-        .download-box { background: #e1f5fe; padding: 1.5rem; border-radius: 6px; border-left: 5px solid var(--accent); }
-        .btn { display: inline-block; background: var(--accent); color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; margin-top: 10px; }
-        footer { text-align: center; padding: 2rem; color: #636e72; font-size: 0.9rem; }
+        /* Terminal Styling */
+        :root {
+            --bg: #0a0a0a;
+            --sidebar-bg: #111;
+            --text-gray: #a0a0a0;
+            --text-blue: #4da6ff;
+            --cursor: #4da6ff;
+            --font-mono: 'Courier New', Courier, monospace;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-gray);
+            font-family: var(--font-mono);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Left Sidebar */
+        aside {
+            width: 250px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid #333;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-prefix {
+            color: var(--text-blue);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            display: block;
+            color: var(--text-gray);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        nav a:before { content: "> "; color: var(--text-blue); opacity: 0; }
+        
+        nav a:hover {
+            color: white;
+            padding-left: 10px;
+        }
+
+        nav a:hover:before { opacity: 1; }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1;
+            padding: 3rem;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* Terminal Cursor Animation */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2rem;
+            background-color: var(--cursor);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        h1, h2 { color: white; font-weight: normal; }
+
+        .content-section { margin-bottom: 4rem; }
+
+        hr { border: 0; border-top: 1px solid #333; margin: 2rem 0; }
+
+        /* Mobile View Fix */
+        @media (max-width: 768px) {
+            body { flex-direction: column; overflow: auto; }
+            aside { width: 100%; height: auto; border-right: none; border-bottom: 1px solid #333; }
+            main { height: auto; }
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Project Name: Solar Tracker v1</h1>
-    <p>Mechanical design, documentation, and source files.</p>
-</header>
-
-<nav>
-    <a href="#overview">Overview</a>
-    <a href="#photos">Photos</a>
-    <a href="#drawings">Drawings</a>
-    <a href="#downloads">Files</a>
-</nav>
-
-<div class="container">
-    <section id="overview">
-        <h2>Project Overview</h2>
-        <p>This project is a dual-axis solar tracker designed for high-latitude efficiency. Built using recycled aluminum and Arduino-based logic.</p>
-        <ul>
-            <li><strong>Build Time:</strong> 14 Days</li>
-            <li><strong>Key Materials:</strong> 6061 Aluminum, Nema 17 Steppers</li>
-        </ul>
-    </section>
-
-    <section id="photos">
-        <h2>Process Photos</h2>
-        <div class="gallery">
+    <aside>
+        <div class="user-prefix">
+            visitor@imgb:~$ ls -l
         </div>
-    </section>
+        <nav>
+            <a href="#project1">Project_1.sh</a>
+            <a href="#project2">Project_2.py</a>
+            <a href="#project3">Project_3.cad</a>
+            <a href="#resume">Resume.pdf</a>
+            <a href="#contact">Contact.txt</a>
+        </nav>
+    </aside>
 
-    <section id="drawings">
-        <h2>Technical Drawings</h2>
-        <p>Instructions and exploded views for assembly.</p>
-        <div class="download-box">
-            <strong>Main Assembly Drawing (PDF)</strong>
-            <p>Full 1:1 scale mechanical drawing for frame fabrication.</p>
+    <main>
+        <div class="content-section" id="welcome">
+            <h1>SYSTEM BOOT SUCCESSFUL <span class="cursor"></span></h1>
+            <p>Welcome to the IMGB node. Local time: <span id="clock"></span></p>
+            <p>Select a directory from the left to view documentation.</p>
+            <hr>
         </div>
-    </section>
 
-    <section id="downloads">
-        <h2>Downloads & Backups</h2>
-        <p>Get the raw STL and STEP files for this project.</p>
-        <ul>
-            <li><a href="#">3D Print Files (STL)</a></li>
-            <li><a href="#">Circuit Diagram (SVG)</a></li>
-        </ul>
-    </section>
-</div>
+        <div class="content-section" id="project1">
+            <h2>[Project 1: Solar Array]</h2>
+            <p>Status: Completed</p>
+            <p>Documentation: Dual-axis sun tracking system using Arduino and recycled aluminum frame components.</p>
+        </div>
+
+        <div class="content-section" id="project2">
+            <h2>[Project 2: Data Hub]</h2>
+            <p>Status: Active</p>
+            <p>Documentation: Private cloud storage solution utilizing custom domain infrastructure.</p>
+        </div>
+
+        </main>
+
+    <script>
+        // Real-time clock for the "terminal" feel
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
 
 </body>
 </html>
+
