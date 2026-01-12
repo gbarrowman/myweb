@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<title> Barrowman </title>
+<meta name="title" content="Barrowman | Documentation">
+<meta name="description" content="Technical documentation and project portfolio.">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://barrowman.net/">
+<meta property="og:title" content="Barrowman">
+<meta property="og:description" content="Technical documentation and project portfolio.">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>B</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMGB // Terminal</title>
+    <title>barrowman.net</title>
     <style>
-        /* Terminal Styling */
         :root {
             --bg: #0a0a0a;
             --sidebar-bg: #111;
@@ -27,21 +36,16 @@
             overflow: hidden;
         }
 
-        /* Left Sidebar */
         aside {
             width: 250px;
             background-color: var(--sidebar-bg);
-            border-right: 1px solid #333;
             padding: 2rem 1.5rem;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
         }
 
-        .user-prefix {
-            color: var(--text-blue);
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-        }
+        .user-prefix { color: var(--text-blue); margin-bottom: 2rem; font-size: 0.9rem; }
 
         nav a {
             display: block;
@@ -49,27 +53,59 @@
             text-decoration: none;
             padding: 0.5rem 0;
             font-size: 1.1rem;
-            transition: all 0.2s;
+            min-height: 1.5em;
+            transition: color 0.2s;
+            cursor: pointer;
         }
 
-        nav a:before { content: "> "; color: var(--text-blue); opacity: 0; }
-        
-        nav a:hover {
-            color: white;
-            padding-left: 10px;
+        nav a:hover { color: white; }
+
+        .sidebar-footer {
+            font-size: 0.7rem;
+            color: #444;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding-top: 1rem;
+            border-top: 1px solid #222;
         }
 
-        nav a:hover:before { opacity: 1; }
+#contact-btn {
+    user-select: text;        
+    -webkit-user-select: text;  
+    -moz-user-select: text;     
+    -ms-user-select: text;      
+}
 
-        /* Main Content Area */
-        main {
-            flex-grow: 1;
-            padding: 3rem;
-            overflow-y: auto;
-            position: relative;
+        nav a {
+            display: block;
+            color: var(--text-gray);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+            min-height: 1.5em; 
         }
 
-        /* Terminal Cursor Animation */
+
+nav a {
+    display: block;
+    color: var(--text-gray);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    font-size: 1.1rem;
+    transition: color 0.2s ease; 
+    cursor: pointer;
+}
+
+nav a:hover {
+    color: #ffffff; 
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+        main { flex-grow: 1; padding: 3rem; overflow-y: auto; }
+
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+
         .cursor {
             display: inline-block;
             width: 10px;
@@ -77,75 +113,131 @@
             background-color: var(--cursor);
             animation: blink 1s step-end infinite;
             vertical-align: middle;
-            margin-left: 5px;
         }
 
-        @keyframes blink {
-            from, to { opacity: 1; }
-            50% { opacity: 0; }
-        }
+        @keyframes blink { from, to { opacity: 1; } 50% { opacity: 0; } }
 
         h1, h2 { color: white; font-weight: normal; }
-
-        .content-section { margin-bottom: 4rem; }
-
         hr { border: 0; border-top: 1px solid #333; margin: 2rem 0; }
-
-        /* Mobile View Fix */
-        @media (max-width: 768px) {
-            body { flex-direction: column; overflow: auto; }
-            aside { width: 100%; height: auto; border-right: none; border-bottom: 1px solid #333; }
-            main { height: auto; }
-        }
     </style>
 </head>
 <body>
 
-    <aside>
-        <div class="user-prefix">
-            visitor@imgb:~$ ls -l
+<noscript>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a0a; color: white; display: flex; align-items: center; justify-content: center; text-align: center; z-index: 9999;">
+        <p>JavaScript is required to boot this system.<br>Please enable JS to view barrowman.net.</p>
+    </div>
+</noscript>
+
+<aside>
+        <div>
+            <div class="user-prefix"></div>
+            <nav id="sidebar-nav">
+                <a href="javascript:void(0)" id="link1" onclick="showSection('project1')"></a>
+                <a href="javascript:void(0)" id="link2" onclick="showSection('project2')"></a>
+                <a href="javascript:void(0)" id="link3" onclick="showSection('resume')"></a>
+                <a href="javascript:void(0)" id="link4" onclick="showSection('contact')"></a>
+            </nav>
         </div>
-        <nav>
-            <a href="#project1">Project_1.sh</a>
-            <a href="#project2">Project_2.py</a>
-            <a href="#project3">Project_3.cad</a>
-            <a href="#resume">Resume.pdf</a>
-            <a href="#contact">Contact.txt</a>
-        </nav>
+
+        <div class="sidebar-footer">
+            barrowman.net
+        </div>
     </aside>
 
     <main>
         <div class="content-section" id="welcome">
-            <h1>SYSTEM BOOT SUCCESSFUL <span class="cursor"></span></h1>
-            <p>Welcome to the IMGB node. Local time: <span id="clock"></span></p>
-            <p>Select a directory from the left to view documentation.</p>
-            <hr>
         </div>
 
         <div class="content-section" id="project1">
-            <h2>[Project 1: Solar Array]</h2>
-            <p>Status: Completed</p>
-            <p>Documentation: Dual-axis sun tracking system using Arduino and recycled aluminum frame components.</p>
+            <h2>Project 1: Coming Soon</h2>
         </div>
-
+        
         <div class="content-section" id="project2">
-            <h2>[Project 2: Data Hub]</h2>
-            <p>Status: Active</p>
-            <p>Documentation: Private cloud storage solution utilizing custom domain infrastructure.</p>
+            <h2>Project 2: Coming Soon</h2>
         </div>
 
+        <div class="content-section" id="resume">
+            <h2>Contact for details</h2>
+        </div>
+<div class="content-section" id="contact">
+    <h2>Contact</h2>
+    <p>Via the portal below</p>
+    
+    <button id="contact-btn" onclick="handleMailAction(event)" 
+        style="background: transparent; border: 1px solid var(--text-blue); color: var(--text-blue); padding: 12px 24px; font-family: var(--font-mono); cursor: pointer; transition: 0.3s; min-width: 250px;">
+        [Mail]
+    </button>
+</div>
         </main>
 
     <script>
-        // Real-time clock for the "terminal" feel
+        const navItems = [
+            { id: 'link1', text: 'Project_1' },
+            { id: 'link2', text: 'Project_2' },
+            { id: 'link3', text: 'Resume' },
+            { id: 'link4', text: 'Contact' }
+        ];
+
+        async function typeWriter(elementId, text) {
+            const el = document.getElementById(elementId);
+            for (let i = 0; i <= text.length; i++) {
+                el.innerText = text.slice(0, i);
+                await new Promise(res => setTimeout(res, 30));
+            }
+        }
+
+
+        async function bootSequence() {
+            for (const item of navItems) {
+                await typeWriter(item.id, item.text);
+            }
+            document.getElementById('welcome').classList.add('active');
+        }
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+
         function updateClock() {
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleString();
         }
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
 
+
+let isEmailRevealed = false;
+
+function handleMailAction(event) {
+    if (event.detail === 0 && !event.pointerType) return;
+
+    const btn = document.getElementById('contact-btn');
+    const secret = "Y29udGFjdEBtYWlsLmJhcnJvd21hbi5uZXQ="; 
+    const decoded = atob(secret);
+
+    if (!isEmailRevealed) {
+
+        btn.innerText = decoded;
+        btn.style.color = "#fff";
+        btn.style.borderColor = "#fff";
+        isEmailRevealed = true;
+    } else {
+
+        const selection = window.getSelection().toString();
+        if (selection.length > 0) {
+
+            return;
+        }
+        window.location.href = "mailto:" + decoded;
+    }
+}
+
+        window.onload = () => {
+            bootSequence();
+            setInterval(updateClock, 1000);
+            updateClock();
+        };
+    </script>
 </body>
 </html>
-
